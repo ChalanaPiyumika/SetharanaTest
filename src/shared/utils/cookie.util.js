@@ -39,8 +39,8 @@ const setAuthCookies = (res, accessToken, refreshToken) => {
     // Cookie options for access token
     const accessTokenOptions = {
         httpOnly: true,
-        secure: isProduction, // Only send over HTTPS in production
-        sameSite: isProduction ? 'strict' : 'lax', // Use lax in dev for cross-port, strict in prod
+        secure: true, // Must be true for cross-domain cookies
+        sameSite: 'none', // Needed for Spaceship Frontend -> Render Backend
         maxAge: parseExpiryToMs(env.JWT_ACCESS_EXPIRY),
         path: '/'
     };
@@ -48,8 +48,8 @@ const setAuthCookies = (res, accessToken, refreshToken) => {
     // Cookie options for refresh token
     const refreshTokenOptions = {
         httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? 'strict' : 'lax',
+        secure: true,
+        sameSite: 'none',
         maxAge: parseExpiryToMs(env.JWT_REFRESH_EXPIRY),
         path: '/'
     };
@@ -66,8 +66,8 @@ const setAuthCookies = (res, accessToken, refreshToken) => {
 const clearAuthCookies = (res) => {
     const cookieOptions = {
         httpOnly: true,
-        secure: env.NODE_ENV === 'production',
-        sameSite: env.NODE_ENV === 'production' ? 'strict' : 'lax',
+        secure: true,
+        sameSite: 'none',
         path: '/'
     };
 
