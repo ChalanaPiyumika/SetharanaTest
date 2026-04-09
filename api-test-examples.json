@@ -1,0 +1,63 @@
+{
+    "healthCheck": {
+        "method": "GET",
+        "url": "http://localhost:5000/health",
+        "description": "Test server health"
+    },
+    "register": {
+        "method": "POST",
+        "url": "http://localhost:5000/api/v1/auth/register",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": {
+            "email": "doctor@example.com",
+            "password": "SecurePass123!",
+            "firstName": "John",
+            "lastName": "Doe",
+            "role": "DOCTOR",
+            "phone": "+1234567890"
+        }
+    },
+    "login": {
+        "method": "POST",
+        "url": "http://localhost:5000/api/v1/auth/login",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": {
+            "email": "doctor@example.com",
+            "password": "SecurePass123!"
+        }
+    },
+    "refreshToken": {
+        "method": "POST",
+        "url": "http://localhost:5000/api/v1/auth/refresh-token",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": {
+            "refreshToken": "<REFRESH_TOKEN_FROM_LOGIN>"
+        }
+    },
+    "logout": {
+        "method": "POST",
+        "url": "http://localhost:5000/api/v1/auth/logout",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": {
+            "refreshToken": "<REFRESH_TOKEN_FROM_LOGIN>"
+        }
+    },
+    "forgotPassword": {
+        "method": "POST",
+        "url": "http://localhost:5000/api/v1/auth/forgot-password",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": {
+            "email": "doctor@example.com"
+        }
+    }
+}
