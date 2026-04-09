@@ -39,17 +39,17 @@ class PaymentController {
      * POST /api/v1/payments/webhook
      */
     async handleWebhook(req, res, next) {
+        console.log('[PayHere Webhook] Received notification');
+
+        // Respond to PayHere IMMEDIATELY — PayHere waits for this before redirecting the browser
+        // If we wait for DB/email processing, PayHere times out and never redirects the user
+        res.status(200).send('OK');
+
+        // Process the payment asynchronously in the background
         try {
-            console.log('[PayHere Webhook] Received notification');
-
-            const result = await paymentService.processWebhook(req.body);
-
-            // PayHere expects a 200 OK response
-            res.status(200).send('OK');
+            await paymentService.processWebhook(req.body);
         } catch (error) {
             console.error('[PayHere Webhook] Error:', error.message);
-            // Still return 200 to prevent PayHere from retrying
-            res.status(200).send('ERROR');
         }
     }
 
