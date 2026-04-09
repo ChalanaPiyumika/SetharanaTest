@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const dns = require('dns');
 const env = require('./env');
 
 /**
@@ -13,14 +14,17 @@ if (env.EMAIL_USER && env.EMAIL_PASS) {
     transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
-        secure: false, // Use STARTTLS (port 587) instead of SSL (port 465)
-        family: 4,     // Force IPv4 — Render has IPv6 connectivity issues with Gmail
+        secure: false, // STARTTLS
         auth: {
             user: env.EMAIL_USER,
             pass: env.EMAIL_PASS
         },
         tls: {
             rejectUnauthorized: false
+        },
+        // Force IPv4 DNS resolution — Render has IPv6 connectivity issues with Gmail SMTP
+        lookup: (hostname, options, callback) => {
+            dns.lookup(hostname, { ...options, family: 4 }, callback);
         }
     });
 
