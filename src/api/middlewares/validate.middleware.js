@@ -31,9 +31,11 @@ const validate = (schema, source = 'body') => {
                 message: detail.message
             }));
 
+            const errorMessage = errors.map(e => e.message).join(', ');
+
             return res.status(400).json({
                 success: false,
-                message: 'Validation failed',
+                message: errorMessage,
                 errors
             });
         }

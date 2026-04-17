@@ -12,19 +12,15 @@ let transporter = null;
 // Only create transporter if email credentials are configured
 if (env.EMAIL_USER && env.EMAIL_PASS) {
     transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // STARTTLS
+        host: env.EMAIL_HOST,
+        port: env.EMAIL_PORT,
+        secure: env.EMAIL_PORT == 465, // Use SSL for port 465, STARTTLS for 587
         auth: {
             user: env.EMAIL_USER,
             pass: env.EMAIL_PASS
         },
         tls: {
             rejectUnauthorized: false
-        },
-        // Force IPv4 DNS resolution — Render has IPv6 connectivity issues with Gmail SMTP
-        lookup: (hostname, options, callback) => {
-            dns.lookup(hostname, { ...options, family: 4 }, callback);
         }
     });
 

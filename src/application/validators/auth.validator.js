@@ -137,6 +137,26 @@ const resetPasswordSchema = Joi.object({
         })
 });
 
+/**
+ * Change password validation schema (authenticated users)
+ */
+const changePasswordSchema = Joi.object({
+    currentPassword: Joi.string()
+        .required()
+        .messages({
+            'any.required': 'Current password is required'
+        }),
+    newPassword: Joi.string()
+        .min(8)
+        .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
+        .required()
+        .messages({
+            'string.min': 'New password must be at least 8 characters long',
+            'string.pattern.base': 'New password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character',
+            'any.required': 'New password is required'
+        })
+});
+
 module.exports = {
     registerSchema,
     loginSchema,
@@ -144,5 +164,6 @@ module.exports = {
     logoutSchema,
     forgotPasswordSchema,
     verifyOtpSchema,
-    resetPasswordSchema
+    resetPasswordSchema,
+    changePasswordSchema
 };

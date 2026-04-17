@@ -125,7 +125,7 @@ class PaymentController {
             // --- Logo Placement ---
             const fs = require('fs');
             const path = require('path');
-            
+
             // Allow checking for a logo at backend/src/assets/logo.png
             const logoPath = path.join(__dirname, '../../assets/logo.png');
             let logoImage = null;
@@ -146,7 +146,7 @@ class PaymentController {
             doc.fillColor('#111111').fontSize(16).font('Helvetica-Bold').text('PAYMENT RECEIPT', { align: 'center' });
             doc.moveDown(0.5);
             doc.fontSize(10).font('Helvetica').text('Seth Arana Ayurveda Consultation Platform', { align: 'center' });
-            doc.text('www.setharana.com | support@setharana.com', { align: 'center' });
+            doc.text('www.setharana.com | info@setharana.com', { align: 'center' });
             doc.text('Phone: +94 XX XXX XXXX', { align: 'center' });
             doc.moveDown(1.5);
 
@@ -183,7 +183,7 @@ class PaymentController {
             writeRow('Date Issued', dateIssued);
             writeRow('Payment Date', `${pDateStr} – ${pTimeStr}`);
             writeRow('Receipt Generated', `${dateIssued} – ${timeGenerated}`);
-            
+
             doc.moveDown(1);
             drawLine();
 
@@ -197,7 +197,7 @@ class PaymentController {
             writeRow('Consultation Type', appointment.consultationType === 1 ? 'Online Video Consultation' : appointment.consultationType === 3 ? 'Email Consultation' : 'In-Person Consultation');
             doc.moveDown(1);
             const consultDate = new Date(appointment.slot.slotDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
-            
+
             let formattedTime = appointment.slot.startTime;
             if (formattedTime && formattedTime.includes(':')) {
                 const [hrStr, minStr] = formattedTime.split(':');
@@ -206,7 +206,7 @@ class PaymentController {
                 h = h % 12 || 12; // 0 becomes 12
                 formattedTime = `${h}.${minStr} ${ampm}`;
             }
-            
+
             writeRow('Consultation Date', consultDate);
             writeRow('Scheduled Time', formattedTime);
 
@@ -237,7 +237,7 @@ class PaymentController {
             doc.font('Helvetica');
             writeRow('Consultation Fee', `Rs. ${consultationFee.toFixed(2)}`);
             writeRow('Platform Service Fee', `Rs.   ${serviceFee.toFixed(2)}`);
-            
+
             doc.moveDown(0.5);
             doc.strokeColor('#cccccc').lineWidth(1).moveTo(leftX, doc.y).lineTo(350, doc.y).stroke();
             doc.moveDown(0.5);
@@ -245,7 +245,7 @@ class PaymentController {
             doc.font('Helvetica-Bold');
             writeRow('TOTAL AMOUNT PAID', `Rs. ${totalAmount.toFixed(2)}`);
             doc.moveDown(1.5);
-            
+
             // Amount in words
             doc.font('Helvetica').text('Amount in Words:', leftX, doc.y);
             const numToWords = (num) => {

@@ -481,6 +481,13 @@ class AuthService {
             throw error;
         }
 
+        // Social login users have no local password set
+        if (!user.passwordHash) {
+            const error = new Error('Your account uses social login (Google/Apple). Please use your social provider to manage your password.');
+            error.statusCode = 400;
+            throw error;
+        }
+
         // Verify current password
         const isValid = await comparePassword(currentPassword, user.passwordHash);
         if (!isValid) {

@@ -10,7 +10,8 @@ const {
     logoutSchema,
     forgotPasswordSchema,
     verifyOtpSchema,
-    resetPasswordSchema
+    resetPasswordSchema,
+    changePasswordSchema
 } = require('../../application/validators/auth.validator');
 const { UserRole } = require('../../domain/enums/user-role.enum');
 
@@ -111,6 +112,6 @@ router.delete('/profile/image', authenticate, authController.removeProfileImage)
  * @desc    Change user password
  * @access  Private
  */
-router.post('/change-password', authenticate, authController.changePassword);
+router.post('/change-password', authenticate, validate(changePasswordSchema), authController.changePassword);
 
 module.exports = router;

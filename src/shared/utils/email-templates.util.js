@@ -43,7 +43,7 @@ const baseEmailTemplate = ({ title, greeting, bodyHtml }) => `
         </div>
         <div class="footer">
             <p>Setharana Ayurveda Consultation Platform</p>
-            <p>For support, contact us at <a href="mailto:support@setharana.com">support@setharana.com</a></p>
+            <p>For support, contact us at <a href="mailto:info@setharana.com">info@setharana.com</a></p>
         </div>
     </div>
 </body>

@@ -40,10 +40,11 @@ const env = {
     PAYHERE_APP_SECRET: process.env.PAYHERE_APP_SECRET || '',
 
     // Email Configuration
-    EMAIL_SERVICE: process.env.EMAIL_SERVICE || 'gmail',
+    EMAIL_HOST: process.env.EMAIL_HOST || 'mail.spaceship.com',
+    EMAIL_PORT: process.env.EMAIL_PORT || 587,
     EMAIL_USER: process.env.EMAIL_USER || '',
     EMAIL_PASS: process.env.EMAIL_PASS || '',
-    EMAIL_FROM: process.env.EMAIL_FROM || 'Ayurveda Consultation <noreply@ayurveda.com>',
+    EMAIL_FROM: process.env.EMAIL_FROM || 'Seth Arana Consulting <info@setharana.com>',
 
     // Cloudinary Configuration
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
