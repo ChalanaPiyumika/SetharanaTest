@@ -51,7 +51,7 @@ class ConsultationService {
         const consultation = await consultationRepository.create({ appointmentId, roomName });
 
         // Build link to consulting page
-        const preJoinUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/consulting`;
+        const preJoinUrl = `${process.env.FRONTEND_URL || 'https://setharana.com'}/consulting`;
 
         // Send invite to patient and doctor
         await emailService.sendConsultationInvite(appointment.patient.user, appointment, preJoinUrl);
