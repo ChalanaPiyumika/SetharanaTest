@@ -169,13 +169,14 @@ class PaymentController {
             drawLine();
 
             // Receipt Information
+            const SL_TIMEZONE = 'Asia/Colombo';
             const rawDate = new Date();
-            const dateIssued = rawDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
-            const timeGenerated = rawDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            const dateIssued = rawDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric', timeZone: SL_TIMEZONE });
+            const timeGenerated = rawDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: SL_TIMEZONE });
 
             const pDateObj = appointment.paymentDate ? new Date(appointment.paymentDate) : rawDate;
-            const pDateStr = pDateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
-            const pTimeStr = pDateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            const pDateStr = pDateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric', timeZone: SL_TIMEZONE });
+            const pTimeStr = pDateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: SL_TIMEZONE });
 
             doc.fontSize(10).font('Helvetica');
             writeRow('Receipt No', appointment.publicId);

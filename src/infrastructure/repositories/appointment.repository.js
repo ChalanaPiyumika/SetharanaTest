@@ -168,7 +168,7 @@ class AppointmentRepository {
                     include: [{
                         model: User,
                         as: 'user',
-                        attributes: ['firstName', 'lastName', 'email']
+                        attributes: ['firstName', 'lastName', 'email', 'profileImageUrl']
                     }]
                 },
                 {
@@ -211,7 +211,7 @@ class AppointmentRepository {
                 {
                     model: Consultation,
                     as: 'consultation',
-                    attributes: ['meetingToken', 'status']
+                    attributes: ['meetingToken', 'status', 'notes']
                 }
             ],
             order: [['CreatedAt', 'DESC']]
@@ -249,7 +249,7 @@ class AppointmentRepository {
                 {
                     model: Consultation,
                     as: 'consultation',
-                    attributes: ['meetingToken', 'status']
+                    attributes: ['meetingToken', 'status', 'notes']
                 }
             ],
             order: [['CreatedAt', 'DESC']]
